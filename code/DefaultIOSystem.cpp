@@ -1,4 +1,4 @@
-/*
+﻿/*
 ---------------------------------------------------------------------------
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
@@ -76,6 +76,35 @@ bool DefaultIOSystem::Exists( const char* pFile) const
 #ifdef _WIN32
     wchar_t fileName16[PATHLIMIT];
 
+
+    if ( ( uint8_t )pFile[ 0 ] == 0xEF && ( uint8_t )pFile[ 1 ] == 0xBB && ( uint8_t )pFile[ 2 ] == 0xBF ) {
+        DefaultLogger::get()->debug( "Found UTF-8 BOM ..." );
+    }
+
+
+    // UTF 32 BE with BOM
+    if ( *( ( uint32_t* )&pFile[0] ) == 0xFFFE0000 ) {
+        DefaultLogger::get()->debug( "Found UTF-8 BOM ..." );
+    }
+
+    // UTF 32 LE with BOM
+    if ( *( ( uint32_t* )&pFile[ 0 ]) == 0x0000FFFE ) {
+        DefaultLogger::get()->debug( "Found UTF-32 BOM ..." );
+    }
+
+    // UTF 16 BE with BOM
+    if ( *( ( uint16_t* )&pFile[0] ) == 0xFFFE ) {
+        DefaultLogger::get()->debug( "Found UTF-16 BOM ..." );
+    }
+
+
+
+    MultiByteToWideChar( CP_UTF8, MB_PRECOMPOSED, pFile, -1, fileName16, PATHLIMIT );
+    struct _stat64 filestat;
+    std::wstring tmp = L"C:\\Users\\kimku\\Desktop\\test\\海海涛涛\\box.3mf";
+    if ( 0 != _wstat64( tmp.c_str(), &filestat ) ) {
+        return false;
+    }
     bool isUnicode = IsTextUnicode(pFile, static_cast<int>(strlen(pFile)), NULL);
     if (isUnicode) {
 

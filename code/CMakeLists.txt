@@ -134,6 +134,7 @@ SET( PUBLIC_HEADERS
   ${HEADER_PATH}/Macros.h
   ${HEADER_PATH}/Exceptional.h
   ${HEADER_PATH}/ByteSwapper.h
+  ${HEADER_PATH}/Uri.h
 )
 
 SET( Core_SRCS

@@ -105,7 +105,6 @@ public:
      */
     virtual ~IOSystem();
 
-
 public:
 
     // -------------------------------------------------------------------
@@ -289,11 +288,12 @@ bool IOSystem::PushDirectory( const std::string &path ) {
     return true;
 }
 
+static const std::string Dummy( "" );
+
 // ----------------------------------------------------------------------------
 AI_FORCE_INLINE
 const std::string &IOSystem::CurrentDirectory() const {
     if ( m_pathStack.empty() ) {
-        static const std::string Dummy("");
         return Dummy;
     }
     return m_pathStack[ m_pathStack.size()-1 ];
