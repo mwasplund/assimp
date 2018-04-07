@@ -1,0 +1,10 @@
+{
+  "name": "assimp",
+  "version": "4.0.1",
+  "dependencies": [],
+  "public": [],
+  "source": [
+    "code/*.cpp",
+    "code/*.h"
+  ]
+}

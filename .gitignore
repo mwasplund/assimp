@@ -11,7 +11,7 @@ build
 # Output
 bin/
 lib/
-
+out/
 
 # Generated
 assimp.pc
